@@ -2,37 +2,137 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Satellite Map</title>
+  <title>Satellite Map with Legend</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.js"></script>
   <style>
+    /* Font definition */
+    @font-face {
+      font-family: 'Bahnschrift';
+      src: url('./fonts/Bahnschrift.woff') format('woff'), /* for woff */
+           url('./fonts/Bahnschrift.ttf') format('truetype'); /* for ttf */
+    }
+
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
     }
 
-    /* Fullscreen map container */
     #map {
       width: 100%;
       height: 100%;
     }
+
+    /* Legend container styling */
+    .legend {
+      position: absolute;
+      bottom: 100px;
+      right: 150px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      font-family: 'Bahnschrift', Arial, sans-serif; /* Added fallback fonts */
+      font-size: 12px;
+      z-index: 10;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+    }
+
+    /* Enhanced legend container styling */
+    .legend {
+      position: absolute;
+      bottom: 100px;
+      right: 150px;
+      background: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Softer shadow for elevation */
+      font-family: 'Bahnschrift', Arial, sans-serif; /* Apply the new font */
+      font-size: 14px;
+      line-height: 1.5;
+      z-index: 10;
+    }
+
+    /* Legend title */
+    .legend h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Legend item layout */
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    /* Last item margin removal */
+    .legend-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Legend color box */
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 1px; /* Slight rounding for a modern look */
+    }
+
+    /* Legend text */
+    .legend-item span {
+      color: #555; /* Softer color for text */
+    }
+
+    /* Font definition using @font-face */
+    @font-face {
+      font-family: 'Bahnschrift';
+      src: url('./fonts/BAHNSCHRIFT.woff') format('woff'); /* Adjust path as needed */
+    }
   </style>
 </head>
 <body>
-  <!-- Satellite map container -->
   <div id="map"></div>
+  <!-- Legend container -->
+  <div class="legend">
+    <h3>2023 Maritime Traffic</h3>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #89b7ed;"></div>
+      <span>Commercial / Industrial</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #8ed963;"></div>
+      <span>Commuter / Recreational</span>
+    </div>
+  </div>
+
   <script>
     // Mapbox access token
     mapboxgl.accessToken = 'pk.eyJ1Ijoib2UyMTg5IiwiYSI6ImNtM3JzZ2ducDA5Nngycm9wYXRqNGJiaXAifQ.GG5W6tyv3tlT3jMr5Lt2CQ';
 
-    // Initialize satellite map
+    // Initialize the map
     const satMap = new mapboxgl.Map({
-      container: 'map', // Div ID for the map container
-      style: 'mapbox://styles/oe2189/cm4g2kil1007m01rx3hjshfw8', // Satellite map style URL
-      center: [-74.032, 40.695], // Center coordinates [lng, lat]
-      zoom: 11.27 // Zoom level
+      container: 'map',
+      style: 'mapbox://styles/oe2189/cm4g2kil1007m01rx3hjshfw8',
+      center: [-74.032, 40.695],
+      zoom: 11.27
     });
   </script>
 </body>
